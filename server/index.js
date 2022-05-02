@@ -7,11 +7,11 @@ const keys = require('./config/keys');
 const mongoose = require('mongoose');
 
 // To handle form and json requrests
-// app.use(express.urlencoded({ extended : true }));
-// app.use(express.json());
-// 
-// 
-// app.use(routes);
+app.use(express.urlencoded({ extended : true }));
+app.use(express.json());
+
+
+app.use(routes);
 
 
 const {database , port} = keys;
