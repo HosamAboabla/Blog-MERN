@@ -4,6 +4,7 @@
   "description": "Blog MERN website",
   "main": "server/index.js",
   "scripts": {
+    "start" : "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/HosamAboabla/Blog-MERN/issues"
   },
-  "homepage": "https://github.com/HosamAboabla/Blog-MERN#readme"
+  "homepage": "https://github.com/HosamAboabla/Blog-MERN#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.2",
+    "nodemon": "^2.0.16"
+  }
 }
