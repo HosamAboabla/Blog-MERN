@@ -31,6 +31,7 @@ router.post("/create" , async (request,responce) => {
             'title' : request.body.title,
             'description' : request.body.description,
             'thumbnail' : request.body.thumbnail,
+            'tag' : request.body.tag,
             'keywords' : request.body.keywords,
             'body' : request.body.body
         })
