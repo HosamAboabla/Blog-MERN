@@ -4,7 +4,7 @@ const NavBar = () => {
 
 
   return (
-    <header class="header">
+    <header className="header">
       <nav className="navbar navbar-expand-lg">
           <div className="search-area">
             <div className="search-area-inner d-flex align-items-center justify-content-center">
