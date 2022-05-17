@@ -84,10 +84,7 @@ const Home = () => {
                 {error && <div> {error} </div>} 
                 {isPending && <Loading/>}
                 {
-                blogs && blogs.map(blog => <Post key={blog._id} thmbnail={blog.thumbnail} 
-                    title = {blog.title} description = {blog.description} updatedAt = {blog.updatedAt}
-                    tag = {blog.tag}
-                    />)
+                    blogs && blogs.map(blog => <Post key={blog._id} blog={blog} />)
                 }
                 
             </div>

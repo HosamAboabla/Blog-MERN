@@ -4,10 +4,12 @@ import Post from './components/Post/Post';
 import Footer from './components/Footer/Footer';
 import Comment from './components/Comment/Comment';
 import Home from './pages/Home/Home';
+import DetailPost from './pages/DetailPost/DetailPost';
 import Loading from './components/Loading/Loading';
 import {BrowserRouter , Routes, Route} from 'react-router-dom' //react router
 
 function App() {
+  // element={<DetailPost />}
   return (
     <div>
       
@@ -16,6 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}/>
+          <Route path="/:slug" element={<DetailPost />} />
           <Route path="/*" element={<><h2>ERROR 404 not found</h2></>}/>
 
         </Routes>
