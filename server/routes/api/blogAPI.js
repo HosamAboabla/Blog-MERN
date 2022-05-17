@@ -16,7 +16,7 @@ router.get("/list", async (request,responce) => {
 
 router.get('/list/:slug' , async (request,responce) => {
     try{
-        const blog = await Blog.find({ slug: request.params.slug });
+        const blog = await Blog.findOne({ slug: request.params.slug });
         responce.status(200).json(blog);
     }
     catch(err){
