@@ -1,16 +1,8 @@
 const mongoose = require('mongoose');
-const slugify = require('slugify');
-
 const Schema = mongoose.Schema;
 
-
-const blogSchema = new Schema(
+const postSchema = new Schema(
     {
-        slug: {
-            type: String,
-            required: [true, 'Please enter the slug'],
-            unique: true,
-        },
         title: {
             type: String,
             required: [true, 'Please enter the title']
@@ -45,4 +37,4 @@ blogSchema.pre('updateOne' , function(){
     data.$set.slug = slugify(data.$set.slug);
 })
 
-module.exports = mongoose.model('blog', blogSchema);
+module.exports = mongoose.model('Blog', blogSchema);

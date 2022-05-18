@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require("express");
 const app = express();
 const path = require('path');
+const cookieParser = require('cookie-parser')
 const routes = require('./routes');
 const keys = require('./config/keys');
 const mongoose = require('mongoose');
@@ -9,6 +10,7 @@ const mongoose = require('mongoose');
 // To handle form and json requrests
 app.use(express.urlencoded({ extended : true }));
 app.use(express.json());
+app.use(cookieParser())
 
 
 app.use(routes);
