@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const topic = require('../../models/topic')
-const {verify,verifyAndAuthorization,verifyAndAdmin} = require('../verifyToken')
+const {verify,verifyPremium,verifyAndAdmin} = require('../verifyToken')
 
 //Admin Dashboard required apis
 //get all topics

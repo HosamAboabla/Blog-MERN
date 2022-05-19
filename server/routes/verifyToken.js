@@ -14,9 +14,18 @@ const verify = (request, responce, next) => {
 }
 
 
-const verifyAndAuthorization = (requset,responce,next) => {
+const verifyBasic = (requset,responce,next) => {
     verify(requset,responce, () => {
-        if (requset.user._id === requset.params.id || requset.user.isAdmin) {
+        if (requset.user.plan === "Basic" || requset.user.isAdmin) {
+            next()
+        }else {
+            return responce.status(403).json('You are not allowed')
+        }
+    })
+}
+const verifyPremium = (requset,responce,next) => {
+    verify(requset,responce, () => {
+        if (requset.user.plan === "Premium" || requset.user.isAdmin) {
             next()
         }else {
             return responce.status(403).json('You are not allowed')
@@ -33,4 +42,4 @@ const verifyAndAdmin = (requset,responce,next) => {
         }
     })
 }
-module.exports = {verify,verifyAndAuthorization,verifyAndAdmin}
+module.exports = {verify,verifyBasic,verifyPremium,verifyAndAdmin}
