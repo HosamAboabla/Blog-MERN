@@ -24,7 +24,7 @@ router.get("/list", async (request,responce) => {
 
 //add a topic , verify admin then ...
 //('/api/topics/add')
-router.post("/add" , async (request,responce) => {
+router.post("/add",verifyAndAdmin , async (request,responce) => {
     try{
         const newTopic = new topic(
         {   name: request.body.name
@@ -39,7 +39,7 @@ router.post("/add" , async (request,responce) => {
 
 //modify topic name , verify admin then ....
 //('/api/topics/modify')
-router.put('/modify/:id' , async (request,responce) => {
+router.put('/modify/:id' ,verifyAndAdmin , async (request,responce) => {
     try{
         const updated = await topic.updateOne(
             {_id : request.params.id},
@@ -54,7 +54,7 @@ router.put('/modify/:id' , async (request,responce) => {
 
 //delete topic , verify admin then ...
 //('/api/topics/delete')
-router.delete('/delete/:id', async (request,responce) => {
+router.delete('/delete/:id',verifyAndAdmin, async (request,responce) => {
     try{
         const id = request.params.id
         const removed = await topic.deleteOne({_id : id});

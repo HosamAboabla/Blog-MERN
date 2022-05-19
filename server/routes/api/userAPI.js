@@ -64,10 +64,9 @@ router.put('/update',verify , async (request,responce) => {
 })
 
 //user delete his acount
-router.delete('/delete',verifyAndAuthorization, async (request,responce) => {
+router.delete('/delete',verify, async (request,responce) => {
     try{
-        const id = request.user.id
-        const removed = await Users.deleteOne({_id : id});
+        const removed = await Users.deleteOne({_id : request.user.id});
         responce.status(200).json(removed);
     }catch(err){
         console.log(err.Message)
@@ -77,7 +76,7 @@ router.delete('/delete',verifyAndAuthorization, async (request,responce) => {
 
 //api for delete user (for admin dashbord), verify admin then ...
 ////('/api/users/delete/:id')
-router.delete('/delete/:id', async (request,responce) => {
+router.delete('/delete/:id',verifyAndAdmin, async (request,responce) => {
     try{
         const id = request.params.id
         const removed = await Users.deleteOne({_id : id});
@@ -91,7 +90,7 @@ router.delete('/delete/:id', async (request,responce) => {
 
 //api count number of user (for admin dashbord), verify admin then ...
 ////('/api/users/count')
-router.get('/count' , async (request , responce) => {
+router.get('/count' ,verifyAndAdmin, async (request , responce) => {
     try{
         const count = await Users.collection.count();
         responce.status(200).json(count);
