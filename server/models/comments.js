@@ -14,9 +14,6 @@ const commentSchema = new Schema(
             ref : 'blog',
             requied: [true, "Enter the description"]
         },
-        iteraction: {
-            type:Number,
-            default: 0},
         text: {
             type: String,
             required : [true, "Please enter the comment"]

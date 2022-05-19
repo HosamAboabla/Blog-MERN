@@ -33,7 +33,8 @@ router.post("/create" , async (request,responce) => {
             'thumbnail' : request.body.thumbnail,
             'tag' : request.body.tag,
             'keywords' : request.body.keywords,
-            'body' : request.body.body
+            'body' : request.body.body,
+            'likes':request.body.likes,
         })
         responce.status(200).json(blog)
     }catch(err) {
@@ -71,5 +72,31 @@ router.delete('/delete/:id' , async (request,responce) => {
     }
 })
 
+//api for count blogs(for Admin)
+//api for post with most interactions 
+//('/api/blogs/count')
+router.get('/count' , async (request , responce) => {
+    try{
+        const count = await Blog.collection.count();
+        responce.status(200).json(count);
+    }
+    catch(err){
+        responce.status(500).json({Message:`Error: ${err}`});
+    }
+})
+
+
+//api for most likes blog(for Admin)
+//api for post with most interactions 
+//('/api/blogs/mostlikes')
+router.get('/mostlikes' , async (request , responce) => {
+    try{
+        const mostLikesPost = await Blog.findOne().sort({"likes":-1});
+        responce.status(200).json(mostLikesPost);
+    }
+    catch(err){
+        responce.status(500).json({Message:`Error: ${err}`});
+    }
+})
 
 module.exports = router

@@ -5,7 +5,9 @@ const cryptoJS = require("crypto-js")
 const {verify,verifyAndAuthorization,verifyAndAdmin} = require('../verifyToken')
 
 // get all users
-router.get('/list',verifyAndAdmin , async (request , responce) => {
+//for admin dashboard
+//('/api/users/list')
+router.get('/list', async (request , responce) => {
     try{
         const userList = await Users.find();
         responce.status(200).json(userList);
@@ -61,6 +63,7 @@ router.put('/update',verify , async (request,responce) => {
     }
 })
 
+//user delete his acount
 router.delete('/delete',verifyAndAuthorization, async (request,responce) => {
     try{
         const id = request.user.id
@@ -71,6 +74,33 @@ router.delete('/delete',verifyAndAuthorization, async (request,responce) => {
         responce.status(500).json({Message: "The user hasn't been deleted",Error: err})
     }
 })
+
+//api for delete user (for admin dashbord), verify admin then ...
+////('/api/users/delete/:id')
+router.delete('/delete/:id', async (request,responce) => {
+    try{
+        const id = request.params.id
+        const removed = await Users.deleteOne({_id : id});
+        responce.status(200).json({Message: `Deleted successfully`});
+    }catch(err){
+        console.log(err.Message)
+        responce.status(500).json({Message: `Error : ${err}`})
+    }
+})
+
+
+//api count number of user (for admin dashbord), verify admin then ...
+////('/api/users/count')
+router.get('/count' , async (request , responce) => {
+    try{
+        const count = await Users.collection.count();
+        responce.status(200).json(count);
+    }
+    catch(err){
+        responce.status(500).json({Message:`Error: ${err}`});
+    }
+})
+
 
 
 module.exports = router
