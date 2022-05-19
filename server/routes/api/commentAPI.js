@@ -37,20 +37,20 @@ router.put('/update/:commentId',verify , async (request,responce) => {
         responce.status(500).json({Message:`There was an ERROR Updating the comment`,Error:err});
     }
 })
-router.put('/incLike/:commentId',verify , async (request,responce) => {
-    try{
-        const id = request.user.id
-        const updated = await Comment.updateOne(
-            {_id :request.params.commentId,user : id},
-             { $inc: {
-                iteraction}});
-        responce.status(201).json(updated)
-    }catch(err){
-        responce.status(500).json({Message:`There was an ERROR increasing the interaction`,Error:err});
-    }
-})
+// router.put('/incLike/:commentId',verify , async (request,responce) => {
+//     try{
+//         const id = request.user.id
+//         const updated = await Comment.updateOne(
+//             {_id :request.params.commentId,user : id},
+//              { $inc: {
+//                 iteraction}});
+//         responce.status(201).json(updated)
+//     }catch(err){
+//         responce.status(500).json({Message:`There was an ERROR increasing the interaction`,Error:err});
+//     }
+// })
 
-router.delete('/delete/:commentId',verifyAndAuthorization, async (request,responce) => {
+router.delete('/delete/:commentId',verify, async (request,responce) => {
     try{
         const id = request.user.id
         const removed = await Comment.deleteOne({_id : request.params.commentId,user: id});

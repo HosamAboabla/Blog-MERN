@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema(
     {
-        
         user: {
             type: Schema.Types.ObjectId,
             ref : 'user',
@@ -14,9 +13,9 @@ const commentSchema = new Schema(
             ref : 'blog',
             requied: [true, "Enter the description"]
         },
-        iteraction: {
-            type:Number,
-            default: 0},
+        // iteraction: {
+        //     type:Number,
+        //     default: 0},
         text: {
             type: String,
             required : [true, "Please enter the comment"]

@@ -54,6 +54,7 @@ router.put('/update',verify , async (request,responce) => {
                 lastName : request.body.lastName,
                 PhoneNumber: request.body.PhoneNumber,
                 isAdmin : request.body.isAdmin,
+                plan: request.body.plan,
                 password : request.body.password}});
         responce.status(201).json(updated)
     }catch(err){
@@ -61,7 +62,7 @@ router.put('/update',verify , async (request,responce) => {
     }
 })
 
-router.delete('/delete',verifyAndAuthorization, async (request,responce) => {
+router.delete('/delete',verify, async (request,responce) => {
     try{
         const id = request.user.id
         const removed = await Users.deleteOne({_id : id});

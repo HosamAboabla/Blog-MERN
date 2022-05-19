@@ -47,23 +47,15 @@ router.post('/register' , async(request,responce) => {
                 lastName : request.body.lastName,
                 phoneNumber: request.body.phone,
                 password : request.body.password && cryptoJS.AES.encrypt(request.body.password,process.env.password_sec).toString(),
-                address : request.body.address,
                 plan : request.body.plan
         });
-
-        //Creating the user's cart
-        const newCart = new Cart({user : newUser._id});
-        await newCart.save()
 
         // creating access token
         const accessToken = creatJWToken(newUser._id,newUser.isAdmin)
         responce.cookie('jwt', accessToken, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 2})
         responce.status(201).json({Message : `new user was created:`})
     } catch(err) {
-        // console.log("Errors :" , err);
         errors = errorHandller(err)
-        // console.log(errors)
-        // console.log("there was error in register")
         responce.status(500).json({Message: 'There was an ERROR creating the user',Error: errors})
     }
 })
