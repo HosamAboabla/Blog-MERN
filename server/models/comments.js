@@ -12,7 +12,7 @@ const commentSchema = new Schema(
         post: {
             type: Schema.Types.ObjectId,
             ref : 'blog',
-            requied: [true, "Enter the description"]
+            requied: [true, "Enter post ID"]
         },
         text: {
             type: String,

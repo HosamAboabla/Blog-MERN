@@ -30,7 +30,7 @@ router.post("/add" , async (request,responce) => {
         {   name: request.body.name
         });
         await newTopic.save()
-        responce.status(201).json({Message: `Added successfully`})
+        responce.status(201).json({Message: `Added successfully`,_id:newTopic._id})
     }catch(err){
         responce.status(500).json({Message: `Error: ${err}`})
     }

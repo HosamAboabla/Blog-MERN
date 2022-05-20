@@ -1052,7 +1052,7 @@ section.gallery .overlay i {
 * ==========================================================
 */
 footer.main-footer {
-  background: #0e0e0e;
+  background: #343a40;
   padding: 100px 0 0;
   color: #fff;
 }
@@ -2434,7 +2434,7 @@ a.bg-primary:focus, a.bg-primary:hover {
 }
 
 .bg-secondary {
-  background-color: #868e96 !important;
+  background-color: hsla(0,0%,100%,.5) !important;
 }
 
 a.bg-secondary:focus, a.bg-secondary:hover {

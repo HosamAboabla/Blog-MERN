@@ -37,11 +37,11 @@ const blogSchema = new Schema(
             type:Number,
             default: 0,
         },
-        // user: {
-        //     type: Schema.Types.ObjectId,
-        //     ref : 'user',
-        //     required : [true, "Please enter the user"]
-        // },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref : 'user',
+            required : [true, "Please enter the user"]
+        },
     },
     { timestamps: true }
 );

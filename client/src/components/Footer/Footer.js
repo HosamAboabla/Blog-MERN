@@ -1,11 +1,8 @@
-
-
+import { memo } from "react";
 const Footer = () => {
-
-
     return (
-        <footer className="main-footer">
-            <div className="container">
+        <footer className="footer-custom main-footer footer-custom">
+            <div className="container footer-custom">
                 <div className="row">
                 <div className="col-md-4">
                     <div className="logo">
@@ -60,22 +57,10 @@ const Footer = () => {
                 </div>
                 </div>
             </div>
-            <div className="copyrights">
-                <div className="container">
-                <div className="row">
-                    <div className="col-md-6">
-                    <p>&copy; 2017. All rights reserved. Your great site.</p>
-                    </div>
-                    <div className="col-md-6 text-right">
-                    <p>Template By <a href="https://bootstrapious.com/p/bootstrap-carousel" className="text-white">Bootstrapious</a>
-                    </p>
-                    </div>
-                </div>
-                </div>
-            </div>
+            
             </footer>
       
     )
   }
   
-  export default Footer
+  export default memo(Footer);
