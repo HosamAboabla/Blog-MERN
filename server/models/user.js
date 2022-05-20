@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const AddressSchema = require("./address").schema;
 
 const Schema = mongoose.Schema;
+const uniqueValidator = require('mongoose-unique-validator');
 const { isEmail } = require('validator');
 
 const userSchema = new Schema(
@@ -30,7 +30,6 @@ const userSchema = new Schema(
             type: String,
             requied: true
         },
-        address: AddressSchema,
         isAdmin: {
             type: Boolean,
             default: false
@@ -41,11 +40,11 @@ const userSchema = new Schema(
             minlength: [6, 'Minimum password length must be 6 characters']
         },
         plan : {type: String,
-            enum : ['Basic,Premium'],
+            enum : ['Basic','Premium'],
             default: "Basic"
         }
     },
     { timestamps: true }
 );
-
+userSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('user', userSchema);

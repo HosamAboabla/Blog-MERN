@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const Users = require('../../models/user.js');
-const Cart = require('../../models/cart.js');
 const cryptoJS = require("crypto-js")
 const jwt = require("jsonwebtoken");
-const {verify,verifyAndAuthorization,verifyAndAdmin} = require('../verifyToken')
+const {verify,verifyAndAdmin} = require('../verifyToken')
 
-function creatJWToken(id,isAdmin) {
+function creatJWToken(id,isAdmin,plan) {
     return jwt.sign({
         id: id,
-        isAdmin : isAdmin},
+        isAdmin : isAdmin,
+        plan : plan},
         process.env.jwt_sec,
         {expiresIn:process.env.jwt_token_life}
     )
@@ -38,6 +38,13 @@ function errorHandller(err) {
     return errors
 }
 
+//caution
+//caution
+//caution
+//caution
+//caution
+//Error in creating JWT (take care Adel)
+//thanks mohamed, i got u
 router.post('/register' , async(request,responce) => {
     try{            
             const newUser = await Users.create({
@@ -46,25 +53,22 @@ router.post('/register' , async(request,responce) => {
                 firstName: request.body.firstName,
                 lastName : request.body.lastName,
                 phoneNumber: request.body.phone,
-                password : request.body.password && cryptoJS.AES.encrypt(request.body.password,process.env.password_sec).toString(),
-                address : request.body.address,
-                plan : request.body.plan
+                password : cryptoJS.AES.encrypt(request.body.password,process.env.password_sec).toString(),
+                plan : request.body.plan,
+                isAdmin : request.body.isAdmin
+                
         });
 
-        //Creating the user's cart
-        const newCart = new Cart({user : newUser._id});
-        await newCart.save()
-
         // creating access token
-        const accessToken = creatJWToken(newUser._id,newUser.isAdmin)
-        responce.cookie('jwt', accessToken, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 2})
-        responce.status(201).json({Message : `new user was created:`})
+        //const accessToken = creatJWToken(newUser._id,newUser.isAdmin.newUser.plan);
+        //responce.cookie('jwt', accessToken, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 2});
+        responce.status(201).json({Message : `new user was created`})
     } catch(err) {
         // console.log("Errors :" , err);
         errors = errorHandller(err)
         // console.log(errors)
         // console.log("there was error in register")
-        responce.status(500).json({Message: 'There was an ERROR creating the user',Error: errors})
+        responce.status(500).json({Message: 'There was an ERROR creating the user',Error: err})
     }
 })
 
@@ -81,7 +85,7 @@ router.post('/login' , async(request,responce) => {
         }else {
         const {password, ...others} = user._doc
         // creating access token
-        const accessToken = creatJWToken(user._id,user.isAdmin)
+        const accessToken = creatJWToken(user._id,user.isAdmin,user.plan)
         responce.cookie('jwt', accessToken, {httpOnly: true, maxAge:1000 * 60 * 60 * 24 * 2})
         responce.status(200).json({Message : "success"})
     }}

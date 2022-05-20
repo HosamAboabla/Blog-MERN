@@ -20,12 +20,17 @@
   },
   "homepage": "https://github.com/HosamAboabla/Blog-MERN#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "cookie-parser": "^1.4.6",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.0",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.2",
+    "mongoose-unique-validator": "^3.0.0",
     "nodemon": "^2.0.16",
     "slugify": "^1.6.5",
     "validator": "^13.7.0"

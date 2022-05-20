@@ -28,7 +28,20 @@ const blogSchema = new Schema(
         body: {
             type: String,
             required : [true, "Please enter the description"]
-        }
+        },
+        topic: {
+            type: Schema.Types.ObjectId,
+            ref : 'topic',
+        },
+        likes: {
+            type:Number,
+            default: 0,
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref : 'user',
+            required : [true, "Please enter the user"]
+        },
     },
     { timestamps: true }
 );

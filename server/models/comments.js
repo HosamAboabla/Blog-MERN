@@ -12,11 +12,8 @@ const commentSchema = new Schema(
         post: {
             type: Schema.Types.ObjectId,
             ref : 'blog',
-            requied: [true, "Enter the description"]
+            requied: [true, "Enter post ID"]
         },
-        iteraction: {
-            type:Number,
-            default: 0},
         text: {
             type: String,
             required : [true, "Please enter the comment"]
