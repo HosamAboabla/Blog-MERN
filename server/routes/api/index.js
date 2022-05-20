@@ -5,7 +5,9 @@ const blogRoutes = require('./blogAPI');
 const userRoutes = require('./userAPI');
 const topicRoutes = require('./topicAPI');
 const authRoutes = require('./auth');
+const commentRoutes = require('./commentAPI')
 
+router.user('/comments', commentRoutes)
 router.use('/users' , userRoutes);
 router.use('/blogs' , blogRoutes);
 router.use('/topics' , topicRoutes);
