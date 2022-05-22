@@ -1,13 +1,30 @@
 const express = require('express');
+const Blog = require('../../models/Blog');
 const router = express.Router();
 const Comment = require('../../models/comments')
 const {verify,verifyPremium} = require('../verifyToken')
 
-// get all comments on the post with id == postId
-router.get('/PostComments/:postId',verify , async (request , responce) => {
+// get all comments on post
+router.get('/PostComments/:slug' , async (request , responce) => {
     try{
-        const comments = await Comment.find({post: request.params.postId});
+        const comments = await Comment.find({slug: request.params.slug});
         responce.status(200).json({Message: "success" , Data : comments});
+    }
+    catch(err){
+        responce.status(500).json({Message:'There was an ERROR fetching the data',Error:err});
+    }
+})
+
+
+// create new comment
+router.post('/PostComments/:slug' , verify , async (request , responce) => {
+    try{
+        const newComment = await Comment.create({
+            user : request.user.id,
+            post : await Blog.findOne({ slug : request.body.slug }),
+            text : request.body.text
+        })
+        responce.status(200).json({Message: "success" , Data : newComment});
     }
     catch(err){
         responce.status(500).json({Message:'There was an ERROR fetching the data',Error:err});
