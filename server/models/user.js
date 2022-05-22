@@ -42,6 +42,9 @@ const userSchema = new Schema(
         plan : {type: String,
             enum : ['Basic','Premium'],
             default: "Basic"
+        },
+        profile : {
+            type : String
         }
     },
     { timestamps: true }
