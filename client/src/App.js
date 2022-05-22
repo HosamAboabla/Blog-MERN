@@ -23,11 +23,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/:slug" element={<DetailPost />} />
-          <Route path="/*" element={<><h2>ERROR 404 not found</h2></>}/>
           <Route path="/admin-statistics" element={<Statistics/>}/>
           <Route path="/admin-topics" element={<Topics/>}/>
           <Route path="/admin-users" element={<Users/>}/>
           <Route path="/side" element={<SideBar/>}/>
+          <Route path="/*" element={<><h2>ERROR 404 not found</h2></>}/>
         </Routes>
       </BrowserRouter>
       <Footer />
