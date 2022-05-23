@@ -4,12 +4,12 @@ const verify = (request, responce, next) => {
     const token = request.cookies.jwt
     if (token) {
         jwt.verify(token,process.env.jwt_sec, (err,user) => {
-            if (err) return responce.status(403).json('Token is not valid!')
+            if (err) return responce.status(403).json({Message : 'Token is not valid!'})
             request.user = user
             next()
         })
     }else {
-        return responce.status(401).json('you are not authenticated!')
+        return responce.status(401).json({Message : 'you are not authenticated!'})
     }
 }
 
