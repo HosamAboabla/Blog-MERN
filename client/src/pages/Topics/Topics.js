@@ -4,13 +4,16 @@ import SideBar from "../../components/SideBar/SideBar";
 import useFetch from "../../useFetch";
 import NewLoading from "../../components/Loading/NewLoading";
 import ErrorMessage from "../../components/Messages/ErrorMessage";
-import { useEffect , useState } from "react";
+import { useEffect , useState,useContext } from "react";
 import { TopicsContext } from "./TopicsContext";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 
 const Topics = () => {
 
     const {data : topics ,error:error, isPending:isPending} = useFetch('http://localhost:5000/api/topics/list');
     const [topicscopy,setTopicscopy] = useState();
+    const {user} = useContext(UserContext);
 
 
     useEffect(()=>{
@@ -19,6 +22,10 @@ const Topics = () => {
         }
         
     },[topics])
+
+    if (user != "admin"){
+        return <Navigate to="/"/>
+    }
 
     return (
         <div className="row">

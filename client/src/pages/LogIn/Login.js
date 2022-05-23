@@ -1,6 +1,8 @@
 import "./LogIn.css";
 import  { useState,useContext  } from 'react';
 import Postmethod from "../../Postmethod";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 
 
 const LogIn = () => {
@@ -8,6 +10,8 @@ const LogIn = () => {
     const [password , setPassword] = useState('');
     const [message , setMessage] = useState(null)
     const [error ,setError] = useState(false);
+
+    const {user , setUser} = useContext(UserContext)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -21,28 +25,27 @@ const LogIn = () => {
             setError(true)
         }
         else{
-            //svae cart to user cart in data base 
-            //compare my cart to user cart and update and delete local storage
-            //save the result in cart state
-            // let response1 = await fetch('/api/auth/verifyUser');
-            // console.log(response1);
-            // if (response1.ok){
-            //     setUser("true");
-            // }
-            // else{
-            //     setUser("false");
-            // }
-
-            // let response2 = await fetch('/api/auth/verifyAdmin');
-            // console.log(response2);
-            // if (response2.ok){
-            //     setAdmin("true");
-            // }
-            // else{
-            //     setAdmin("false");
-            // }
+            const response1 = await fetch('/api/auth/verifyUser');
+            if (response1.ok){
+                const jsondata = await response1.json()
+                if(jsondata.Admin){
+                    setUser("admin")
+                }
+                else if(jsondata.premium){
+                    setUser("prem")
+                }
+                else{
+                    setUser("basic")
+                }
+            }
+            else{
+                setUser("false");
+            }          
         }
         }
+    if (user != "false"){
+        return <Navigate to="/"/>
+    }
     return ( 
     <div style={{height: '100vh'}}>
         

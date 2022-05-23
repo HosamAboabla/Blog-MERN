@@ -2,12 +2,16 @@ import SideBar from "../../components/SideBar/SideBar";
 import useFetch from "../../useFetch";
 import NewLoading from "../../components/Loading/NewLoading";
 import ErrorMessage from "../../components/Messages/ErrorMessage";
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 const Statistics = () => {
     const {data : users_count ,error:error1, isPending:isPending1} = useFetch('http://localhost:5000/api/users/count');
     const {data : posts_count ,error:error2, isPending:isPending2} = useFetch('http://localhost:5000/api/blogs/count');
     const {data : post ,error:error3, isPending:isPending3} = useFetch('http://localhost:5000/api/blogs/mostlikes');
-    const [d,setD] = useState()
+    const [d,setD] = useState();
+    const {user} = useContext(UserContext);
+
     
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
@@ -17,6 +21,10 @@ const Statistics = () => {
             setD(`${dd.getDay()} ${months[dd.getMonth()]} ${dd.getFullYear()}`);
         }
     },[post])
+
+    if (user != "admin"){
+        return <Navigate to="/"/>
+    }
 
     return (
         <div className="row">

@@ -1,7 +1,9 @@
 import './SignUp.css'
 import  { useState,useContext  } from 'react';
+import { Navigate } from 'react-router-dom';
 import Postmethod from '../../Postmethod';
 import Putmethod from '../../Putmethod';
+import { UserContext } from '../../UserContext';
 
 
 const SignUp = () => {
@@ -18,6 +20,8 @@ const SignUp = () => {
 
     const [message , setMessage] = useState(null);
     const [error ,setError] = useState(false);
+
+    const {user,setUser} = useContext(UserContext);
 
     const handlePlanChange = (event) => {
         setPlan(event.target.value)
@@ -41,16 +45,27 @@ const SignUp = () => {
             setError(true);
         }
         else{
-            let response1 = await fetch('/api/auth/verifyUser');
-            console.log(response1);
-            // if (response1.ok){
-            //     setUser("true");
-            // }
-            // else{
-            //     setUser("false");
-            // }           
+            const response1 = await fetch('/api/auth/verifyUser');
+            if (response1.ok){
+                const jsondata = await response1.json()
+                if(jsondata.Admin){
+                    setUser("admin")
+                }
+                else if(jsondata.premium){
+                    setUser("prem")
+                }
+                else{
+                    setUser("basic")
+                }
+            }
+            else{
+                setUser("false");
+            }          
         }        
         }
+    if (user != "false"){
+        return <Navigate to="/"/>
+    }
     return ( 
     <div className='signup-body'>    
         <div className="signup-container">

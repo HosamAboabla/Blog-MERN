@@ -13,27 +13,53 @@ import Topics from './pages/Topics/Topics';
 import Users from './pages/Users/Users';
 import LogIn from './pages/LogIn/Login';
 import SignUp from './pages/SignUp/SignUp';
+import { UserContext } from './UserContext';
+import { useEffect ,useState} from 'react';
 
 function App() {
-  // element={<DetailPost />}
+  const [user,setUser] = useState("false");
+  useEffect(async ()=>{
+    const response1 = await fetch('/api/auth/verifyUser');
+    if (response1.ok){
+        const jsondata = await response1.json()
+        if(jsondata.Admin){
+          setUser("admin")
+        }
+        else if(jsondata.premium){
+          setUser("prem")
+        }
+        else{
+          setUser("basic")
+        }
+    }
+    else{
+        setUser("false");
+    }   
+  },[])
+
+  
   return (
     <div>
       
-
+<UserContext.Provider value={{user,setUser}}>
       <NavBar />
       <BrowserRouter>
+      
         <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/:slug" element={<DetailPost />} />
-          <Route path="/*" element={<><h2>ERROR 404 not found</h2></>}/>
-          <Route path="/admin-statistics" element={<Statistics/>}/>
-          <Route path="/admin-topics" element={<Topics/>}/>
-          <Route path="/admin-users" element={<Users/>}/>
-          <Route path="/side" element={<SideBar/>}/>
-          <Route path="/login" element={<LogIn/>}/>
-          <Route path="/signup" element={<SignUp/>}/>
+          
+            <Route path="/" element={<Home />}/>
+            <Route path="/:slug" element={<DetailPost />} />
+            <Route path="/*" element={<><h2>ERROR 404 not found</h2></>}/>
+            <Route path="/admin-statistics" element={<Statistics/>}/>
+            <Route path="/admin-topics" element={<Topics/>}/>
+            <Route path="/admin-users" element={<Users/>}/>
+            <Route path="/login" element={<LogIn/>}/>
+            <Route path="/signup" element={<SignUp/>}/>
+          
         </Routes>
+        
       </BrowserRouter>
+    </UserContext.Provider>
       <Footer />
 
       
