@@ -60,8 +60,8 @@ router.post('/register' , async(request,responce) => {
         });
 
         // creating access token
-        //const accessToken = creatJWToken(newUser._id,newUser.isAdmin.newUser.plan);
-        //responce.cookie('jwt', accessToken, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 2});
+        const accessToken = creatJWToken(newUser._id,newUser.isAdmin,newUser.plan);
+        responce.cookie('jwt', accessToken, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 2});
         responce.status(201).json({Message : `new user was created`})
     } catch(err) {
         // console.log("Errors :" , err);
@@ -101,9 +101,11 @@ router.get('/logout',(request,responce) => {
 })
 
 router.get('/verifyUser', verify, (request,responce) => {
-    responce.status(200)
-})
-router.get('/verifyAdmin', verifyAndAdmin, (request,responce) => {
-    responce.status(200)
+    const Admin = request.user.isAdmin;
+    var Premium = false
+    if(request.user.plan === "Premium"){
+        Premium = true
+    }
+    responce.status(200).json({Admin,Premium})
 })
 module.exports = router;
