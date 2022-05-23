@@ -77,12 +77,12 @@ const DetailPost = () => {
                         
                         <div className="post-comments">
                           <header>
-                            <h3 className="h6">Post Comments<span className="no-of-comments">(3)</span></h3>
+                            <h3 className="h6">Post Comments<span className="no-of-comments">({comments !== null  && comments.Data.length})</span></h3>
                           </header>
 
                             {commentsError && <div> {commentsError} </div>} 
                             {commentsIsPending && <Loading/>}
-                            { comments.data && comments.data.map(comment => <Comment comment={comment}/> )}
+                            { comments !== null  && comments.Data.map(comment => <Comment comment={comment}/> )}
                             
                         </div>
 

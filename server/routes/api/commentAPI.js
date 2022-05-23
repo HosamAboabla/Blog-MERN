@@ -19,9 +19,10 @@ router.get('/PostComments/:slug' , async (request , responce) => {
 // create new comment
 router.post('/PostComments/:slug' , verify , async (request , responce) => {
     try{
+        const blog = await Blog.findOne({ slug : request.params.slug })
         const newComment = await Comment.create({
             user : request.user.id,
-            post : await Blog.findOne({ slug : request.body.slug }),
+            post : blog.id,
             text : request.body.text
         })
         responce.status(200).json({Message: "success" , Data : newComment});
