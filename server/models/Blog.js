@@ -24,7 +24,6 @@ const blogSchema = new Schema(
             requied: [true, "Please enter the image url"]
         },
         keywords: [String],
-        tag: String,
         body: {
             type: String,
             required : [true, "Please enter the description"]

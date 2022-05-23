@@ -94,8 +94,8 @@ router.get('/count' , async (request , responce) => {
 
 //api for most likes blog(for Admin)
 //api for post with most interactions 
-//('/api/blogs/mostlikes')
-router.get('/mostlikes' , async (request , responce) => {
+//('/api/blogs/mostcomments')
+router.get('/mostcomments' , async (request , responce) => {
     try{
         const mostLikesPost = await Blog.findOne().sort({"likes":-1});
         responce.status(200).json(mostLikesPost);
