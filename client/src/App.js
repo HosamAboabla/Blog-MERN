@@ -11,6 +11,8 @@ import SideBar from './components/SideBar/SideBar';
 import Statistics from './pages/Statistics/Statistics';
 import Topics from './pages/Topics/Topics';
 import Users from './pages/Users/Users';
+import LogIn from './pages/LogIn/Login';
+import SignUp from './pages/SignUp/SignUp';
 
 function App() {
   // element={<DetailPost />}
@@ -28,6 +30,8 @@ function App() {
           <Route path="/admin-topics" element={<Topics/>}/>
           <Route path="/admin-users" element={<Users/>}/>
           <Route path="/side" element={<SideBar/>}/>
+          <Route path="/login" element={<LogIn/>}/>
+          <Route path="/signup" element={<SignUp/>}/>
         </Routes>
       </BrowserRouter>
       <Footer />
