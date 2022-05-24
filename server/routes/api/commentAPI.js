@@ -7,7 +7,8 @@ const {verify,verifyPremium} = require('../verifyToken')
 // get all comments on post
 router.get('/PostComments/:slug' , async (request , responce) => {
     try{
-        const comments = await Comment.find({slug: request.params.slug});
+        const blog = await Blog.findOne({ slug : request.params.slug })
+        const comments = await Comment.find({ post: blog.id }).populate('user');
         responce.status(200).json({Message: "success" , Data : comments});
     }
     catch(err){
