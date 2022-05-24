@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Blog = require('../../models/Blog.js');
+const comments = require('../../models/comments.js');
 const {verify,verifyBasic,verifyPremium,verifyAndAdmin} = require('../verifyToken')
 
 
@@ -97,8 +98,25 @@ router.get('/count' , async (request , responce) => {
 //('/api/blogs/mostcomments')
 router.get('/mostcomments' , async (request , responce) => {
     try{
-        const mostLikesPost = await Blog.findOne().sort({"likes":-1});
-        responce.status(200).json(mostLikesPost);
+        let mostBlog , maxi = 0;
+        const blogs = await comments.aggregate([
+            {$match : {}},
+            {$group: {
+                _id : "$post" ,
+                total : {$count : {}},
+        }}
+        ])
+
+        blogs.map( blog => {
+            if(blog.total > maxi)
+            {
+                maxi = blog.total
+                mostBlog = blog._id
+            }
+        })
+        const result = await Blog.findById(mostBlog)
+
+        responce.status(200).json(result);
     }
     catch(err){
         responce.status(500).json({Message:`Error: ${err}`});
