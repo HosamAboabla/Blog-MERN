@@ -34,6 +34,10 @@ const DetailPost = () => {
     const {data : post , error , isPending} = useFetch(link);
     console.log("blogs" , post);
 
+    const commentsLink = `/api/comments/PostComments/${slug}`  ;
+    const {data : comments , commentsError , commentsIsPending} = useFetch(commentsLink);
+    console.log("comments" , comments);
+
     return (
       <header className="header">
         <div className="container">
@@ -73,9 +77,13 @@ const DetailPost = () => {
                         
                         <div className="post-comments">
                           <header>
-                            <h3 className="h6">Post Comments<span className="no-of-comments">(3)</span></h3>
+                            <h3 className="h6">Post Comments<span className="no-of-comments">({comments !== null  && comments.Data.length})</span></h3>
                           </header>
-                          <Comment /> 
+
+                            {commentsError && <div> {commentsError} </div>} 
+                            {commentsIsPending && <Loading/>}
+                            { comments !== null  && comments.Data.map(comment => <Comment comment={comment}/> )}
+                            
                         </div>
 
 

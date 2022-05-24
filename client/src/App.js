@@ -55,7 +55,7 @@ function App() {
             <Route path="/admin-users" element={<Users/>}/>
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/signup" element={<SignUp/>}/>
-          
+
         </Routes>
         
       </BrowserRouter>
