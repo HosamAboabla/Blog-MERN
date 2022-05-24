@@ -16,6 +16,7 @@ const AddComment = () => {
         })
         console.log('message' , mess);
         console.log('error' , err);
+        window.location.reload();
 
 
     }

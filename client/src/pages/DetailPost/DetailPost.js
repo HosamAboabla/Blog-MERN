@@ -52,7 +52,7 @@ const DetailPost = () => {
                           <img src={post.thumbnail} alt="..." className="img-fluid" /></div>
                       <div className="post-details">
                         <div className="post-meta d-flex justify-content-between">
-                          <div className="category"><a href="#">{post.tag}</a></div>
+                          <div className="category"><a href="#">{post.topic && post.topic.name}</a></div>
                         </div>
                         <h1>{post.title}
                           <a href="#"><i className="fa fa-bookmark-o"></i></a></h1>

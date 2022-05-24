@@ -12,7 +12,7 @@ const Post = ({blog}) => {
             <div className="post-details">
             <div className="post-meta d-flex justify-content-between">
                 <div className="date meta-last">{d.getDay()} {months[d.getMonth()]} | {d.getFullYear()}</div>
-                <div className="category"><a href="#">{blog.tag}</a></div>
+                <div className="category"><a href="#">{blog.topic && blog.topic.name}</a></div>
             </div><a href="post.html">
                 <h3 className="h4">{blog.title}</h3></a>
             <p className="text-muted">{blog.description}</p>
