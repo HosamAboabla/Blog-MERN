@@ -35,7 +35,6 @@ const useFetch = (url) => {
                 setError(err.message)
             }  
         })
-
         return () => abortContr.abort(); }
         , [url]) //url is a dependency that leeds useEffect to work only if event happen to url 
     return {data, error, isPending};
