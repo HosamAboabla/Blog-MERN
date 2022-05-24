@@ -44,7 +44,8 @@ const userSchema = new Schema(
             default: "Basic"
         },
         profile : {
-            type : String
+            type : String,
+            default: "https://pngset.com/images/person-placeholder-image-free-stencil-balloon-electronics-text-transparent-png-1450459.png"
         }
     },
     { timestamps: true }
