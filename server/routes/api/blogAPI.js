@@ -116,7 +116,10 @@ router.get('/mostcomments' , async (request , responce) => {
         })
         const result = await Blog.findById(mostBlog)
 
-        responce.status(200).json(result);
+        responce.status(200).json({
+            count : maxi,
+            post : result
+        });
     }
     catch(err){
         responce.status(500).json({Message:`Error: ${err}`});
