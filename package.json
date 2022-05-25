@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Blog MERN website",
   "main": "server/index.js",
+  "engines": {
+    "node": "16.14.0"
+  },
   "scripts": {
     "start": "nodemon server/index.js",
     "client-install": "npm install --prefix client",
