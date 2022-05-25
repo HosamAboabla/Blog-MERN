@@ -1,4 +1,4 @@
-
+import './signUp.css'
 import  { useState,useContext  } from 'react';
 import { Navigate } from 'react-router-dom';
 import Postmethod from '../../Postmethod';
