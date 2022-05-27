@@ -1,4 +1,5 @@
 const express = require('express');
+const req = require('express/lib/request');
 const router = express.Router();
 const Blog = require('../../models/Blog.js');
 const comments = require('../../models/comments.js');
@@ -8,7 +9,7 @@ const {verify,verifyBasic,verifyPremium,verifyAndAdmin} = require('../verifyToke
 // any one can see the posts
 router.get("/list", async (request,responce) => {
     try{
-        const blogs = await Blog.find()
+        const blogs = await Blog.find().populate('user')
         responce.status(200).json(blogs)
     }catch(err) {
         console.log(err);
@@ -19,7 +20,7 @@ router.get("/list", async (request,responce) => {
 
 router.get('/list/:slug' , async (request,responce) => {
     try{
-        const blog = await Blog.findOne({ slug: request.params.slug });
+        const blog = await Blog.findOne({ slug: request.params.slug }).populate('user');
         responce.status(200).json(blog);
     }
     catch(err){
@@ -34,10 +35,10 @@ router.post("/create" ,verifyPremium, async (request,responce) => {
             title : request.body.title,
             description : request.body.description,
             thumbnail : request.body.thumbnail,
-            tag : request.body.tag,
+            topic : request.body.topic,
             keywords : request.body.keywords,
             body : request.body.body,
-            likes:request.body.likes,
+            user : request.user.id
         })
         responce.status(200).json(blog)
     }catch(err) {

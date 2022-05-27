@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer';
 import Comment from './components/Comment/Comment';
 import Home from './pages/Home/Home';
 import DetailPost from './pages/DetailPost/DetailPost';
+import AddPost from './pages/addPost/AddPost';
 import Loading from './components/Loading/Loading';
 import {BrowserRouter , Routes, Route} from 'react-router-dom' //react router
 import SideBar from './components/SideBar/SideBar';
@@ -49,12 +50,13 @@ function App() {
           
             <Route path="/" element={<Home />}/>
             <Route path="/:slug" element={<DetailPost />} />
-            <Route path="/*" element={<><h2>ERROR 404 not found</h2></>}/>
             <Route path="/admin-statistics" element={<Statistics/>}/>
             <Route path="/admin-topics" element={<Topics/>}/>
             <Route path="/admin-users" element={<Users/>}/>
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/signup" element={<SignUp/>}/>
+            <Route path="/add_post" element={<AddPost/>}/>
+            <Route path="/*" element={<><h2>ERROR 404 not found</h2></>}/>
 
         </Routes>
         

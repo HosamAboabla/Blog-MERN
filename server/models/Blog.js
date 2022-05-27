@@ -29,8 +29,7 @@ const blogSchema = new Schema(
             required : [true, "Please enter the description"]
         },
         topic: {
-            type: Schema.Types.ObjectId,
-            ref : 'topic',
+            type: "String",
         },
         user: {
             type: Schema.Types.ObjectId,

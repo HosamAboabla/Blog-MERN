@@ -35,7 +35,8 @@ const NavBar = () => {
             <a  className="btn btn-signup-custom" href="/signup">Sign up</a>
         </div>:
         <div className="text-end">
-          <button  className="btn btn-signup-custom" onClick={LogOutHandler}>log out</button>
+          <button  className="btn btn-signup-custom mr-3" onClick={LogOutHandler}>log out</button>
+          <a  className="btn btn-signup-custom" href="/add_post">Add post</a>
       </div>}
       </div>
     </div>

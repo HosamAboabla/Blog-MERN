@@ -18,10 +18,8 @@ const Post = ({blog}) => {
             <p className="text-muted">{blog.description}</p>
             <div className="post-footer d-flex align-items-center"><a href="#" className="author d-flex align-items-center flex-wrap">
                 <div className="avatar">
-                    <img src="https://hosamaboabla-ecommerce.herokuapp.com/images/headphones.jpg" alt="..." className="img-fluid" /></div>
-                <div className="title"><span>John Doe</span></div></a>
-                <div className="date"><i className="icon-clock"></i> 2 months ago</div>
-                <div className="comments meta-last"><i className="icon-comment"></i>12</div>
+                    <img src={blog.user && blog.user.profile} alt="..." className="img-fluid" /></div>
+                <div className="title"><span>{ blog.user && `${blog.user.firstName} ${blog.user.lastName}`}</span></div></a>
             </div>
             </div>
         </div>
