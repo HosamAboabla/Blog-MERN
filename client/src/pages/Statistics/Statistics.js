@@ -53,7 +53,7 @@ const Statistics = () => {
                         <div>
                             <div className="statistics-header-big"><span className="statistics-text-big">Post with most comments: {post && post.count }</span> <span className="statistics-number-big"> {post.likes}</span></div>
                             <div>
-                                <h2 className="statistics-head-big"><a href="/">{post.post.title}</a></h2>
+                                <h2 className="statistics-head-big"><a href={`/${post.post.slug}`}>{post.post.title}</a></h2>
                                 <span className="statistics-text-name">{ post && `${post.post.user.firstName} ${post.post.user.lastName}`} |</span><span className="statistics-date-big">{d}</span>
                             </div>
                         </div>
