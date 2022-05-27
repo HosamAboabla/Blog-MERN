@@ -6,9 +6,9 @@ import { useEffect, useState ,useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 const Statistics = () => {
-    const {data : users_count ,error:error1, isPending:isPending1} = useFetch('http://localhost:5000/api/users/count');
-    const {data : posts_count ,error:error2, isPending:isPending2} = useFetch('http://localhost:5000/api/blogs/count');
-    const {data : post ,error:error3, isPending:isPending3} = useFetch('http://localhost:5000/api/blogs/mostlikes');
+    const {data : users_count ,error:error1, isPending:isPending1} = useFetch('/api/users/count');
+    const {data : posts_count ,error:error2, isPending:isPending2} = useFetch('/api/blogs/count');
+    const {data : post ,error:error3, isPending:isPending3} = useFetch('/api/blogs/mostcomments');
     const [d,setD] = useState();
     const {user} = useContext(UserContext);
 
@@ -17,13 +17,14 @@ const Statistics = () => {
 
     useEffect(()=>{
         if(post){
-            const dd = new Date(post.createdAt);
+            const dd = new Date(post.post.createdAt);
             setD(`${dd.getDay()} ${months[dd.getMonth()]} ${dd.getFullYear()}`);
         }
     },[post])
 
     if (user != "admin"){
-        return <Navigate to="/"/>
+        console.log('user' , user);
+        // return <Navigate to="/"/>
     }
 
     return (
@@ -50,10 +51,10 @@ const Statistics = () => {
                         {isPending3 && <NewLoading/>}
                         {post && 
                         <div>
-                            <div className="statistics-header-big"><span className="statistics-text-big">Post with most likes</span> <span className="statistics-number-big"> {post.likes}</span></div>
+                            <div className="statistics-header-big"><span className="statistics-text-big">Post with most comments: {post && post.count }</span> <span className="statistics-number-big"> {post.likes}</span></div>
                             <div>
-                                <h2 className="statistics-head-big"><a href="/">{post.title}</a></h2>
-                                <span className="statistics-text-name">By : Mohamed Ahmed |</span><span className="statistics-date-big">{d}</span>
+                                <h2 className="statistics-head-big"><a href="/">{post.post.title}</a></h2>
+                                <span className="statistics-text-name">{ post && `${post.post.user.firstName} ${post.post.user.lastName}`} |</span><span className="statistics-date-big">{d}</span>
                             </div>
                         </div>
                         }

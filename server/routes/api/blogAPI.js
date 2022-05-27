@@ -115,7 +115,7 @@ router.get('/mostcomments' , async (request , responce) => {
                 mostBlog = blog._id
             }
         })
-        const result = await Blog.findById(mostBlog)
+        const result = await Blog.findById(mostBlog).populate('user')
 
         responce.status(200).json({
             count : maxi,
