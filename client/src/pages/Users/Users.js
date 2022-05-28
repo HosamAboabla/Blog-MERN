@@ -26,7 +26,7 @@ const Users = () => {
         }
     },[users])
 
-    if (user != "admin"){
+    if (user == "basic" || user == "prem" || user == "notauth" ){
         return <Navigate to="/"/>
     }
 

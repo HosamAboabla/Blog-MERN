@@ -22,9 +22,8 @@ const Statistics = () => {
         }
     },[post])
 
-    if (user != "admin"){
-        console.log('user' , user);
-        // return <Navigate to="/"/>
+    if (user == "basic" || user == "prem" || user == "notauth" ){
+        return <Navigate to="/"/>
     }
 
     return (

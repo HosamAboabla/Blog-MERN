@@ -9,7 +9,7 @@ const NavBar = () => {
   const LogOutHandler = async ()=>{
     const response1 = await fetch('/api/auth/logout');
     if(response1.ok){
-      setUser("false");
+      setUser("notauth");
     }      
   }
   return (
@@ -21,22 +21,21 @@ const NavBar = () => {
         </a>
 
         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="/" className="nav-link px-2 text-white">Home</a></li>
-          <li><a href="/post" className="nav-link px-2 text-white">Post</a></li>
+          <li style={{margin:"0 10px"}}><a href="/" className="nav-link px-2 text-white">Home</a></li>
+          <li style={{margin:"0 10px"}}><a href="/add_post" className="nav-link px-2 text-white">Add Post</a></li>
           {user == "admin" ? 
-          <li><a href="/admin-statistics" className="nav-link px-2 text-white">Dashboard</a></li>:
+          <li style={{margin:"0 10px"}}><a href="/admin-statistics" className="nav-link px-2 text-white">Dashboard</a></li>:
           <></>
           }
-          <li><a href="/" className="nav-link px-2 text-white">About</a></li>
+          <li style={{margin:"0 10px"}}><a href="/" className="nav-link px-2 text-white">About</a></li>
         </ul>
-        {user=="false"?
+        {user=="notauth"?
         <div className="text-end">
             <a className="btn btn-login-custom" href="/login">Login</a>
             <a  className="btn btn-signup-custom" href="/signup">Sign up</a>
         </div>:
         <div className="text-end">
           <button  className="btn btn-signup-custom mr-3" onClick={LogOutHandler}>log out</button>
-          <a  className="btn btn-signup-custom" href="/add_post">Add post</a>
       </div>}
       </div>
     </div>

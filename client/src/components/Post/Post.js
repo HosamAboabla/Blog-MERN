@@ -11,15 +11,13 @@ const Post = ({blog}) => {
                 <img src={blog.thumbnail} alt="..." className="img-fluid" /></a></div>
             <div className="post-details">
             <div className="post-meta d-flex justify-content-between">
-                <div className="date meta-last">{d.getDay()} {months[d.getMonth()]} | {d.getFullYear()}</div>
                 <div className="category"><a href="#">{blog.topic && blog.topic.name}</a></div>
-            </div><a href="post.html">
+            </div><a href={blog.slug}>
                 <h3 className="h4">{blog.title}</h3></a>
             <p className="text-muted">{blog.description}</p>
             <div className="post-footer d-flex align-items-center"><a href="#" className="author d-flex align-items-center flex-wrap">
-                <div className="avatar">
-                    <img src={blog.user && blog.user.profile} alt="..." className="img-fluid" /></div>
-                <div className="title"><span>{ blog.user && `${blog.user.firstName} ${blog.user.lastName}`}</span></div></a>
+
+                <div className="title"><span>{ blog.user && `by ${blog.user.firstName} ${blog.user.lastName} | ${d.getDay()} ${months[d.getMonth()]} ${d.getFullYear()}`}</span></div></a>
             </div>
             </div>
         </div>

@@ -24,7 +24,7 @@ router.get("/list", async (request,responce) => {
 
 //add a topic , verify admin then ...
 //('/api/topics/add')
-router.post("/add",verifyAndAdmin , async (request,responce) => {
+router.post("/add",verifyPremium , async (request,responce) => {
     try{
         const newTopic = new topic(
         {   name: request.body.name

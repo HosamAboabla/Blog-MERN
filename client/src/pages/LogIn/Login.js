@@ -43,7 +43,7 @@ const LogIn = () => {
             }          
         }
         }
-    if (user != "false"){
+    if (user === "prem" || user === "basic" || user === "admin"){
         return <Navigate to="/"/>
     }
     return ( 

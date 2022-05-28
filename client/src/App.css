@@ -328,3 +328,12 @@ tr:first-child{
   display: flex;
   justify-content: center;
 }
+
+.post-coming-soon{
+  height: 500px;
+  width:100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}

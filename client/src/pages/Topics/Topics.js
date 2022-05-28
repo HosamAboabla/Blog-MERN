@@ -23,10 +23,9 @@ const Topics = () => {
         
     },[topics])
 
-    if (user != "admin"){
+    if (user == "basic" || user == "prem" || user == "notauth" ){
         return <Navigate to="/"/>
     }
-
     return (
         <div className="row">
             <div className="statistics-sidebar-custom col"><SideBar/></div>

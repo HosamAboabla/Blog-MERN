@@ -26,7 +26,7 @@ function App() {
         if(jsondata.Admin){
           setUser("admin")
         }
-        else if(jsondata.premium){
+        else if(jsondata.Premium){
           setUser("prem")
         }
         else{
@@ -34,7 +34,7 @@ function App() {
         }
     }
     else{
-        setUser("false");
+        setUser("notauth");
     }   
   },[])
 
