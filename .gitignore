@@ -1,5 +1,5 @@
 node_modules/
-
+.env
 # dependencies
 client/node_modules/
 client/.pnp
