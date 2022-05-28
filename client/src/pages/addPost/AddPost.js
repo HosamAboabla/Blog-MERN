@@ -19,7 +19,7 @@ const AddPost = () => {
 
     const[error,setError] = useState('');
 
-    const {data : topics ,error:err, isPending:isPending} = useFetch('http://localhost:5000/api/topics/list');
+    const {data : topics ,error:err, isPending:isPending} = useFetch('/api/topics/list');
 
     const {user} = useContext(UserContext)
 
